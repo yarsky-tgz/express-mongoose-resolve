@@ -15,19 +15,19 @@
  *
  * @param model {object} mongoose model
  * @param index {string} name of model index to query against (if composeQuery is String)
- * @param composeQuery {function} function which will compose query from params
+ * @param composeCondition {function} function which will compose query from params
  * @param paramName {string} name of parameter (by default model name with first letter lowercase)
  * @param prepareQuery {function} callback, which will alter query according to request query flags
  * @returns {function(*, *, *): *}
  */
-function resolve(model, { composeQuery, paramName, index = 'id', prepareQuery = () => {} } = {}) {
+function resolve(model, { composeCondition = undefined, paramName = undefined, index = 'id', prepareQuery = () => {} } = {}) {
   return async (req, res, next) => {
     const { modelName } = model;
     const propertyName = modelName.charAt(0).toUpperCase() + modelName.slice(1);
     paramName = paramName || propertyName;
     req.resolved = req.resolved || {};
     const { resolved, params, flags } = req;
-    const criteria = typeof composeQuery === 'function' ? { [index]: params[paramName] } : composeQuery(params);
+    const criteria = typeof composeCondition === 'function' ? { [index]: params[paramName] } : composeCondition(params);
     const query = model.findOne(criteria);
     prepareQuery(query, flags);
     resolved[propertyName] = await query.exec();

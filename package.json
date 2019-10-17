@@ -1,6 +1,6 @@
 {
   "name": "express-mongoose-resolve",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "description": "flexible express middleware which resolves mongoose model by id specified via params and assigns it to req.resolved",
   "main": "index.js",
   "scripts": {

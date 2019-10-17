@@ -37,6 +37,6 @@ You cannot alter this behavior
 | Key | Type | Description |
 | --- | --- | --- |
 | paramName | `string` | `req.params` object property key |
-| composeQuery | <code>function</code> | callback which will return custom query condition from request params |
+| composeCondition | <code>function</code> | callback which will return custom query condition from request params |
 | index | <code>string</code> | name of model index to query against (if composeQuery is String) |
 | prepareQuery | <code>function</code> | callback, which will alter query according to request query flags |
