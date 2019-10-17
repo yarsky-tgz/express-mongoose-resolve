@@ -23,7 +23,7 @@
 function resolve(model, { composeCondition = undefined, paramName = undefined, index = 'id', prepareQuery = () => {} } = {}) {
   return async (req, res, next) => {
     const { modelName } = model;
-    const propertyName = modelName.charAt(0).toUpperCase() + modelName.slice(1);
+    const propertyName = modelName.charAt(0).toLowerCase() + modelName.slice(1);
     paramName = paramName || propertyName;
     req.resolved = req.resolved || {};
     const { resolved, params, flags } = req;
