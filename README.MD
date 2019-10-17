@@ -17,7 +17,7 @@ router.get('view/:model', resolve(Model), (req, res) => res.json(req.resolved.mo
 
 ### API Reference
 
-#### resolve(model, composeQuery, index, prepareQuery) ⇒ <code>function</code>
+#### resolve(model, options) ⇒ <code>function</code>
 Configures and returns middleware listener which will resolve model instance from request params and assign it
 to "req.resolved" Object using lowercase name of the model, so such middleware:
 
@@ -29,7 +29,14 @@ You cannot alter this behavior
 
 | Param | Type | Description |
 | --- | --- | --- |
-| model | <code>object</code> | mongoose model |
-| composeQuery | <code>string</code> | name of parameter or callback which will compose query from request params |
+| model | `object` | mongoose model |
+| options | `object` | options
+
+##### Options
+
+| Key | Type | Description |
+| --- | --- | --- |
+| paramName | `string` | `req.params` object property key |
+| composeQuery | <code>function</code> | callback which will return custom query condition from request params |
 | index | <code>string</code> | name of model index to query against (if composeQuery is String) |
 | prepareQuery | <code>function</code> | callback, which will alter query according to request query flags |

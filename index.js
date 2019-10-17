@@ -14,19 +14,20 @@
  * You cannot alter this behavior
  *
  * @param model {object} mongoose model
- * @param composeQuery {string} name of parameter or callback which will compose query from request params
  * @param index {string} name of model index to query against (if composeQuery is String)
+ * @param composeQuery {function} function which will compose query from params
+ * @param paramName {string} name of parameter (by default model name with first letter lowercase)
  * @param prepareQuery {function} callback, which will alter query according to request query flags
  * @returns {function(*, *, *): *}
  */
-function resolve(model, composeQuery, { index = 'id', prepareQuery = () => {} } = {}) {
+function resolve(model, { composeQuery, paramName, index = 'id', prepareQuery = () => {} } = {}) {
   return async (req, res, next) => {
     const { modelName } = model;
-    const propertyName = modelName.toLowerCase();
-    composeQuery = composeQuery || propertyName;
+    const propertyName = modelName.charAt(0).toUpperCase() + modelName.slice(1);
+    paramName = paramName || propertyName;
     req.resolved = req.resolved || {};
     const { resolved, params, flags } = req;
-    const criteria = typeof composeQuery === 'string' ? { [index]: params[composeQuery] } : composeQuery(params);
+    const criteria = typeof composeQuery === 'function' ? { [index]: params[paramName] } : composeQuery(params);
     const query = model.findOne(criteria);
     prepareQuery(query, flags);
     resolved[propertyName] = await query.exec();
