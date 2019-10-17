@@ -1,0 +1,29 @@
+{
+  "name": "express-mongoose-resolve",
+  "version": "1.0.0",
+  "description": "flexible express middleware which resolves mongoose model by id specified via params and assigns it to req.resolved",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/yarsky-tgz/express-mongoose-resolve.git"
+  },
+  "keywords": [
+    "mongoose",
+    "express",
+    "params",
+    "id",
+    "resolve"
+  ],
+  "author": "Yaroslav Dobzhanskij <merlyn.tgz@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/yarsky-tgz/express-mongoose-resolve/issues"
+  },
+  "homepage": "https://github.com/yarsky-tgz/express-mongoose-resolve#readme",
+  "devDependencies": {
+    "jsdoc-to-markdown": "^5.0.2"
+  }
+}
