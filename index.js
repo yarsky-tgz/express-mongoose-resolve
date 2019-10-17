@@ -27,8 +27,8 @@ function resolve(model, { composeCondition = undefined, paramName = undefined, i
     paramName = paramName || propertyName;
     req.resolved = req.resolved || {};
     const { resolved, params, flags } = req;
-    const criteria = typeof composeCondition === 'function' ? { [index]: params[paramName] } : composeCondition(params);
-    const query = model.findOne(criteria);
+    const condition = typeof composeCondition === 'function' ? composeCondition(params) : { [index]: params[paramName] };
+    const query = model.findOne(condition);
     prepareQuery(query, flags);
     resolved[propertyName] = await query.exec();
 
